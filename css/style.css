@@ -30,6 +30,11 @@ body{
     height: 6rem;
 }
 
+.follow{
+    font-style: italic;
+    font-size: 13px;
+}
+
 .coming-soon{
     margin-top: 50px;
     font-size: 3rem;
@@ -49,6 +54,12 @@ body{
     animation: gentleTilt 4s ease-in-out infinite;
     transform-origin: center center;
     filter: drop-shadow(0px 20px 30px rgba(0, 0, 0, 0.3));
+}
+
+.insta-icon{
+    margin-top: 1rem;
+    height: 2rem;
+    cursor: pointer;
 }
 
 @keyframes gentleTilt {
