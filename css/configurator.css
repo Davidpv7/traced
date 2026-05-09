@@ -524,3 +524,43 @@
 @media (prefers-reduced-motion: reduce) {
   .config-panel { animation: none; }
 }
+
+/* ── ROUTE STATS ────────────────────────────────────── */
+.route-stats {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  margin-top: 1.25rem;
+  width: 100%;
+  max-width: 340px;
+  background: var(--bg-dark);
+  border: 1px solid #1e1e1c;
+}
+.stat {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.85rem 0.5rem;
+}
+.stat-value {
+  font-family: var(--serif);
+  font-size: 1.3rem;
+  font-weight: 300;
+  color: var(--text-light);
+  line-height: 1;
+}
+.stat-label {
+  font-size: 0.58rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.stat-divider {
+  width: 1px;
+  height: 32px;
+  background: #1e1e1c;
+  flex-shrink: 0;
+}

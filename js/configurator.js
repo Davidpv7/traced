@@ -140,6 +140,49 @@ function parseAndRenderGPX(file) {
     dotEnd.setAttribute('cx', last.x.toFixed(1));
     dotEnd.setAttribute('cy', last.y.toFixed(1));
 
+    // ── STATS ──────────────────────────────────────────
+    // Distance — Haversine formula between consecutive points
+    function haversine(a, b) {
+      const R    = 6371000; // Earth radius in metres
+      const dLat = (b.lat - a.lat) * Math.PI / 180;
+      const dLon = (b.lon - a.lon) * Math.PI / 180;
+      const x    = Math.sin(dLat/2) * Math.sin(dLat/2)
+                 + Math.cos(a.lat * Math.PI/180) * Math.cos(b.lat * Math.PI/180)
+                 * Math.sin(dLon/2) * Math.sin(dLon/2);
+      return R * 2 * Math.atan2(Math.sqrt(x), Math.sqrt(1 - x));
+    }
+
+    let totalMetres = 0;
+    for (let i = 1; i < coords.length; i++) {
+      totalMetres += haversine(coords[i - 1], coords[i]);
+    }
+    const distanceKm = (totalMetres / 1000).toFixed(1);
+
+    // Elevation gain — sum of all positive ascents
+    const elevEls = points.map(pt => parseFloat(pt.querySelector('ele')?.textContent || '0'));
+    let elevGain  = 0;
+    for (let i = 1; i < elevEls.length; i++) {
+      const diff = elevEls[i] - elevEls[i - 1];
+      if (diff > 0) elevGain += diff;
+    }
+
+    // Duration — from first to last timestamp if available
+    const times = points.map(pt => pt.querySelector('time')?.textContent).filter(Boolean);
+    let durationStr = '—';
+    if (times.length >= 2) {
+      const ms      = new Date(times[times.length - 1]) - new Date(times[0]);
+      const totalMin= Math.round(ms / 60000);
+      const hrs     = Math.floor(totalMin / 60);
+      const mins    = totalMin % 60;
+      durationStr   = hrs > 0 ? `${hrs}h ${mins}m` : `${mins}m`;
+    }
+
+    // Render stats
+    document.getElementById('stat-distance').textContent  = `${distanceKm} km`;
+    document.getElementById('stat-elevation').textContent = elevGain > 0 ? `${Math.round(elevGain)} m` : '—';
+    document.getElementById('stat-duration').textContent  = durationStr;
+    document.getElementById('route-stats').style.display  = 'flex';
+
     showPreview();
   };
   reader.readAsText(file);
@@ -174,6 +217,7 @@ gpxRemove.addEventListener('click', () => {
   gpxLoaded.hidden= true;
   lockTabs();
   hidePreview();
+  document.getElementById('route-stats').style.display = 'none';
   updateSummary();
 });
 
