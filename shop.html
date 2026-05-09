@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop — Traced</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=DM+Sans:wght@300;400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/shop.css">
+  <script defer src="js/shop.js"></script>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="nav">
+    <a href="index.html" class="nav-logo">
+      <img src="assests/images/traced_cropped.png" alt="Traced Logo" class="traced-logo">
+    </a>
+    <ul class="nav-links">
+      <li><a href="shop.html" class="nav-active">Shop</a></li>
+      <li><a href="#">Our Story</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- SHOP HERO -->
+  <section class="shop-hero">
+
+    <!-- Subtle background grid -->
+    <div class="shop-hero-bg" aria-hidden="true">
+      <svg viewBox="0 0 900 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <line x1="0" y1="100" x2="900" y2="100" stroke="#c8b89a" stroke-width="0.3" opacity="0.12"/>
+        <line x1="0" y1="200" x2="900" y2="200" stroke="#c8b89a" stroke-width="0.3" opacity="0.12"/>
+        <line x1="0" y1="300" x2="900" y2="300" stroke="#c8b89a" stroke-width="0.3" opacity="0.12"/>
+        <line x1="225" y1="0" x2="225" y2="400" stroke="#c8b89a" stroke-width="0.3" opacity="0.12"/>
+        <line x1="450" y1="0" x2="450" y2="400" stroke="#c8b89a" stroke-width="0.3" opacity="0.12"/>
+        <line x1="675" y1="0" x2="675" y2="400" stroke="#c8b89a" stroke-width="0.3" opacity="0.12"/>
+      </svg>
+    </div>
+
+    <div class="shop-hero-content">
+      <p class="hero-eyebrow shop-eyebrow">The Collection</p>
+      <h1 class="shop-hero-title">Choose your <em>format.</em></h1>
+      <p class="shop-hero-sub">One object. Three ways to own it. From the raw print to a fully gift-ready edition.</p>
+    </div>
+
+    <!-- Decorative accent line -->
+    <div class="shop-hero-rule" aria-hidden="true"></div>
+
+  </section>
+
+  <!-- PRODUCT LISTING -->
+  <section class="products-section">
+    <div class="products-grid">
+
+      <!-- Card 1: The Print -->
+      <article class="product-card reveal">
+        <div class="product-visual">
+          <svg viewBox="0 0 280 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- 3D print suggestion: layered route lines -->
+            <path d="M 40 220 C 70 200 100 175 130 150 C 160 125 185 105 210 85 C 225 75 245 68 260 72"
+              stroke="#c8b89a" stroke-width="0.6" stroke-linecap="round" fill="none" opacity="0.15"/>
+            <path d="M 40 225 C 70 205 100 180 130 155 C 160 130 185 110 210 90 C 225 80 245 73 260 77"
+              stroke="#c8b89a" stroke-width="0.6" stroke-linecap="round" fill="none" opacity="0.2"/>
+            <path d="M 40 230 C 70 210 100 185 130 160 C 160 135 185 115 210 95 C 225 85 245 78 260 82"
+              stroke="#c8b89a" stroke-width="0.6" stroke-linecap="round" fill="none" opacity="0.15"/>
+            <!-- Main route on top -->
+            <path d="M 40 220 C 70 200 100 175 130 150 C 160 125 185 105 210 85 C 225 75 245 68 260 72"
+              stroke="#c8b89a" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+            <circle cx="40"  cy="220" r="3.5" fill="#c8b89a" opacity="0.5"/>
+            <circle cx="260" cy="72"  r="5"   fill="#ff6a00"/>
+            <!-- Subtle grid -->
+            <line x1="0" y1="93"  x2="280" y2="93"  stroke="#c8b89a" stroke-width="0.3" opacity="0.08"/>
+            <line x1="0" y1="140" x2="280" y2="140" stroke="#c8b89a" stroke-width="0.3" opacity="0.08"/>
+            <line x1="0" y1="187" x2="280" y2="187" stroke="#c8b89a" stroke-width="0.3" opacity="0.08"/>
+            <line x1="93"  y1="0" x2="93"  y2="280" stroke="#c8b89a" stroke-width="0.3" opacity="0.08"/>
+            <line x1="187" y1="0" x2="187" y2="280" stroke="#c8b89a" stroke-width="0.3" opacity="0.08"/>
+          </svg>
+          <div class="product-visual-glow"></div>
+        </div>
+        <div class="product-info">
+          <div class="product-tag">Tier 01</div>
+          <h2 class="product-name">The Print</h2>
+          <p class="product-desc">The object on its own. Your route 3D printed in matte PLA+, ready to sit on a shelf or lean against a wall. Nothing more. Nothing less.</p>
+          <ul class="product-includes">
+            <li>3D printed route</li>
+            <li>Choice of colour & size</li>
+            <li>Ships in 5–7 days</li>
+          </ul>
+          <div class="product-footer">
+            <span class="product-price">From $89</span>
+            <a href="configurator.html?tier=print" class="product-cta">Configure Your Piece</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 2: The Print + Frame -->
+      <article class="product-card reveal reveal-delay-1">
+        <div class="product-visual">
+          <svg viewBox="0 0 280 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Shadow box frame -->
+            <rect x="50" y="50" width="180" height="180" rx="2"
+              stroke="#c8b89a" stroke-width="1.2" fill="none" opacity="0.35"/>
+            <rect x="58" y="58" width="164" height="164" rx="1"
+              stroke="#c8b89a" stroke-width="0.5" fill="none" opacity="0.15"/>
+            <!-- Route inside frame -->
+            <path d="M 75 195 C 100 175 120 158 140 142 C 160 126 178 112 205 95"
+              stroke="#c8b89a" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+            <circle cx="75"  cy="195" r="3"   fill="#c8b89a" opacity="0.5"/>
+            <circle cx="205" cy="95"  r="4.5" fill="#ff6a00"/>
+            <!-- Stats card hint at bottom of frame -->
+            <rect x="88" y="200" width="104" height="16" rx="1"
+              fill="none" stroke="#c8b89a" stroke-width="0.5" opacity="0.2"/>
+            <line x1="96" y1="206" x2="140" y2="206" stroke="#c8b89a" stroke-width="0.5" opacity="0.3"/>
+            <line x1="96" y1="210" x2="128" y2="210" stroke="#c8b89a" stroke-width="0.5" opacity="0.2"/>
+          </svg>
+          <div class="product-visual-glow"></div>
+        </div>
+        <div class="product-info">
+          <div class="product-tag">Tier 02</div>
+          <h2 class="product-name">The Print + Frame</h2>
+          <p class="product-desc">Your route mounted inside a clean shadow box frame, wall-ready from the moment it arrives. Includes a stats card on thick stock.</p>
+          <ul class="product-includes">
+            <li>3D printed route</li>
+            <li>Shadow box frame</li>
+            <li>Stats card (distance, elevation, date)</li>
+          </ul>
+          <div class="product-footer">
+            <span class="product-price">From $109</span>
+            <a href="configurator.html?tier=framed" class="product-cta">Configure Your Piece</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 3: The Gift Edition -->
+      <article class="product-card reveal reveal-delay-2">
+        <div class="product-visual">
+          <svg viewBox="0 0 280 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Gift box outline -->
+            <rect x="55" y="90" width="170" height="140" rx="2"
+              stroke="#c8b89a" stroke-width="1" fill="none" opacity="0.3"/>
+            <!-- Box lid -->
+            <rect x="48" y="72" width="184" height="28" rx="2"
+              stroke="#c8b89a" stroke-width="1" fill="none" opacity="0.3"/>
+            <!-- Ribbon vertical -->
+            <line x1="140" y1="72" x2="140" y2="230" stroke="#ff6a00" stroke-width="1" opacity="0.5"/>
+            <!-- Ribbon horizontal -->
+            <line x1="55" y1="100" x2="225" y2="100" stroke="#ff6a00" stroke-width="1" opacity="0.5"/>
+            <!-- Bow loops -->
+            <path d="M 140 72 C 120 55 100 55 108 72" stroke="#ff6a00" stroke-width="1.2" fill="none" opacity="0.7" stroke-linecap="round"/>
+            <path d="M 140 72 C 160 55 180 55 172 72" stroke="#ff6a00" stroke-width="1.2" fill="none" opacity="0.7" stroke-linecap="round"/>
+            <!-- Route hint inside box -->
+            <path d="M 85 165 C 105 152 120 143 140 136 C 160 129 175 124 195 115"
+              stroke="#c8b89a" stroke-width="1.5" stroke-linecap="round" fill="none" opacity="0.5"/>
+            <circle cx="85"  cy="165" r="2.5" fill="#c8b89a" opacity="0.4"/>
+            <circle cx="195" cy="115" r="3.5" fill="#ff6a00" opacity="0.8"/>
+          </svg>
+          <div class="product-visual-glow"></div>
+        </div>
+        <div class="product-info">
+          <div class="product-tag">Tier 03</div>
+          <h2 class="product-name">The Gift Edition</h2>
+          <p class="product-desc">Everything in the framed edition, presented in branded gift packaging. Tissue, a custom stats card, and a wax-sealed envelope. Ready to give.</p>
+          <ul class="product-includes">
+            <li>3D printed route + shadow box frame</li>
+            <li>Branded gift box & tissue</li>
+            <li>Custom stats card + wax-sealed envelope</li>
+          </ul>
+          <div class="product-footer">
+            <span class="product-price">From $129</span>
+            <a href="configurator.html?tier=gift" class="product-cta">Configure Your Piece</a>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+    <footer>
+        <span class="footer-logo">Traced</span>
+        <span class="footer-copy">© 2026 Traced. All rights reserved.</span>
+    </footer>
+
+</body>
+</html>
