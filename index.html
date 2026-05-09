@@ -3,28 +3,160 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Traced</title>
+    <title>Traced - Your Effort. Preserved</title>
     <script defer src="js/main.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=DM+Sans:wght@300;400&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <main class="hero-section">
-        <img src='assests/images/traced_cropped.png' class="logo">
+    <!-- Nav bar section -->
+  <nav id="nav">
+    <a href="#" class="nav-logo">
+    <img src="assests/images/traced_cropped.png" alt="Traced Logo" class="traced-logo">
+    </a>
+    <ul class="nav-links">
+      <li><a href="#">Shop</a></li>
+      <li><a href="#">Our Story</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </nav>
+ 
+  <!-- Hero Section -->
 
-        <p class="coming-soon">Coming Soon...</p>
-
-        <div class="object-container">
-            <img src="assests/images/62E0FCC6-A0EB-49DC-AA48-8AADD47208BE.PNG" class="model-tilt" alt="Traced 3D terrain model">
+  <section class="hero">
+    <div class="hero-bg" aria-hidden="true">
+      <svg viewBox="0 0 900 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path class="route-path"
+          d="M 80 500 C 120 480 160 440 210 400 C 260 360 290 320 330 280
+             C 370 240 400 200 450 170 C 500 140 540 130 590 120
+             C 640 110 680 115 720 130 C 760 145 790 170 810 200
+             C 830 230 830 265 820 300 C 810 335 790 360 760 380
+             C 730 400 695 405 660 395 C 625 385 600 360 580 330
+             C 560 300 555 265 565 235 C 575 205 600 185 630 178"
+          stroke="#ff6a00" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+ 
+        <!-- Route dots -->
+        <circle cx="80"  cy="500" r="4" fill="#ff6a00" opacity="0.6"/>
+        <circle cx="450" cy="170" r="4" fill="#ff6a00" opacity="0.6"/>
+        <circle cx="630" cy="178" r="6" fill="#ff6a00" opacity="0.9"/>
+ 
+        <!-- Grid lines -->
+        <line x1="0" y1="150" x2="900" y2="150" stroke="#c8b89a" stroke-width="0.3" opacity="0.15"/>
+        <line x1="0" y1="300" x2="900" y2="300" stroke="#c8b89a" stroke-width="0.3" opacity="0.15"/>
+        <line x1="0" y1="450" x2="900" y2="450" stroke="#c8b89a" stroke-width="0.3" opacity="0.15"/>
+        <line x1="225" y1="0" x2="225" y2="600" stroke="#c8b89a" stroke-width="0.3" opacity="0.15"/>
+        <line x1="450" y1="0" x2="450" y2="600" stroke="#c8b89a" stroke-width="0.3" opacity="0.15"/>
+        <line x1="675" y1="0" x2="675" y2="600" stroke="#c8b89a" stroke-width="0.3" opacity="0.15"/>
+      </svg>
+    </div>
+ 
+    <div class="hero-content">
+      <p class="hero-eyebrow">3D Printed Cycling Art</p>
+      <h1 class="hero-title">Your effort.<br /><em>Preserved.</em></h1>
+      <p class="hero-sub">Turn the routes you've pedalled into permanent, handcrafted objects. Every curve. Every climb.</p>
+      <a href="#" class="hero-cta">Configure Your Piece</a>
+    </div>
+ 
+    <div class="hero-scroll" aria-hidden="true">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+ 
+  <!-- WHAT WE DO -->
+  <section style="background: var(--bg-mid);">
+    <div class="what reveal">
+      <div class="what-text">
+        <p class="section-label reveal reveal-delay-1">What We Do</p>
+        <h2 class="reveal reveal-delay-2">Routes that deserve<br />to be remembered.</h2>
+        <p class="reveal reveal-delay-3">You upload your GPX file. We render your route into a sculptural 3D print — a physical record of where you've been. Not a photo. Not a screenshot. An object.</p>
+      </div>
+      <div class="what-visual reveal reveal-delay-2" aria-hidden="true">
+        <svg viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M 50 250 C 80 220 110 190 150 160 C 190 130 220 110 260 90"
+            stroke="#ff6a00" stroke-width="2" stroke-linecap="round" fill="none"/>
+          <path d="M 50 250 C 60 200 80 170 100 150"
+            stroke="#c8b89a" stroke-width="0.8" stroke-linecap="round" fill="none" opacity="0.3"/>
+          <circle cx="50"  cy="250" r="5" fill="#ff6a00" opacity="0.5"/>
+          <circle cx="260" cy="90"  r="5" fill="#ff6a00"/>
+          <rect x="230" y="60" width="60" height="60" rx="1"
+            stroke="#c8b89a" stroke-width="0.5" fill="none" opacity="0.2"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+ 
+  <!-- HOW IT WORKS -->
+  <section>
+    <div class="how">
+      <p class="section-label reveal">The Process</p>
+      <h2 class="reveal reveal-delay-1">Three steps from<br />ride to object.</h2>
+      <div class="steps">
+        <div class="step reveal reveal-delay-1">
+          <div class="step-num">01</div>
+          <div class="step-divider"></div>
+          <h3>Choose your design</h3>
+          <p>Pick from our curated formats — minimal line, topographic, or relief. Each one treats your route differently.</p>
         </div>
-
-        <div>
-            <p class="follow">But for now, follow our journey...</p>
-            <a href="https://www.instagram.com/traced.au/" target="_blank" rel="noopener noreferrer">
-            <img src="assests/images/—Pngtree—instagram icon vector_8704817.png" class="insta-icon" alt="Instagram Icon">
-            </a>
+        <div class="step reveal reveal-delay-2">
+          <div class="step-num">02</div>
+          <div class="step-divider"></div>
+          <h3>Upload your route</h3>
+          <p>Drop your GPX file and watch your route render in real time. See exactly what your piece will look like before you commit.</p>
         </div>
+        <div class="step reveal reveal-delay-3">
+          <div class="step-num">03</div>
+          <div class="step-divider"></div>
+          <h3>We print and ship</h3>
+          <p>Your piece is printed to order and shipped directly to you. Built to last, built to display.</p>
         </div>
-
-    </main>
+      </div>
+    </div>
+  </section>
+ 
+  <!-- MATERIAL -->
+  <section class="material">
+    <div class="material-inner">
+      <div>
+        <p class="section-label reveal">The Object</p>
+        <h2 class="reveal reveal-delay-1">Made with intention.<br />Built to last.</h2>
+        <p class="reveal reveal-delay-2">Every piece is printed using premium PLA+ in matte finishes that age beautifully. No clutter. No colour noise. Just form.</p>
+      </div>
+      <div class="material-grid reveal reveal-delay-2">
+        <div class="material-cell">
+          <span class="material-cell-title">Material</span>
+          <span class="material-cell-value">PLA+</span>
+        </div>
+        <div class="material-cell">
+          <span class="material-cell-title">Finish</span>
+          <span class="material-cell-value">Matte</span>
+        </div>
+        <div class="material-cell">
+          <span class="material-cell-title">Lead Time</span>
+          <span class="material-cell-value">5–7 days</span>
+        </div>
+        <div class="material-cell">
+          <span class="material-cell-title">Made</span>
+          <span class="material-cell-value">To Order</span>
+        </div>
+      </div>
+    </div>
+  </section>
+ 
+  <!-- QUOTE -->
+  <section class="quote-section">
+    <blockquote class="reveal">
+      Every ride is a line drawn across the world. We make that line permanent.
+    </blockquote>
+    <p class="quote-attr reveal reveal-delay-1">Traced — Sydney, Australia</p>
+  </section>
+ 
+  <!-- FOOTER -->
+  <footer>
+    <span class="footer-logo">Traced</span>
+    <span class="footer-copy">© 2026 Traced. All rights reserved.</span>
+  </footer>
 </body>
 </html>
