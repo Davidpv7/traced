@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Configure Your Piece — Traced</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=DM+Sans:wght@300;400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/configurator.css">
+  <script defer src="js/configurator.js"></script>
+</head>
+<body class="configurator-page">
+
+  <!-- NAV -->
+  <nav id="nav">
+    <a href="index.html" class="nav-logo">
+      <img src="assests/images/traced_cropped.png" alt="Traced Logo" class="traced-logo">
+    </a>
+    <ul class="nav-links">
+      <li><a href="shop.html">Shop</a></li>
+      <li><a href="#">Our Story</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- CONFIGURATOR -->
+  <main class="configurator">
+
+    <!-- ── LEFT PANEL ── -->
+    <div class="config-left">
+
+      <!-- Header -->
+      <div class="config-header">
+        <p class="config-eyebrow">Configure Your Piece</p>
+        <h1 class="config-title">Make it <em>yours.</em></h1>
+      </div>
+
+      <!-- Tier selector -->
+      <div class="tier-selector">
+        <button class="tier-btn" data-tier="print">
+          <span class="tier-btn-name">The Print</span>
+          <span class="tier-btn-price">From $89</span>
+        </button>
+        <button class="tier-btn" data-tier="framed">
+          <span class="tier-btn-name">Print + Frame</span>
+          <span class="tier-btn-price">From $109</span>
+        </button>
+        <button class="tier-btn" data-tier="gift">
+          <span class="tier-btn-name">Gift Edition</span>
+          <span class="tier-btn-price">From $129</span>
+        </button>
+      </div>
+
+      <!-- Tabs -->
+      <div class="config-tabs" role="tablist">
+        <button class="config-tab active" data-tab="gpx"    role="tab">GPX</button>
+        <button class="config-tab locked" data-tab="colour" role="tab">Colour</button>
+        <button class="config-tab locked tier-tab" data-tab="label"  role="tab" data-min-tier="framed">Label</button>
+        <button class="config-tab locked tier-tab" data-tab="gifts"  role="tab" data-min-tier="gift">Gifts</button>
+      </div>
+
+      <!-- Panels -->
+      <div class="config-panels">
+
+        <!-- GPX -->
+        <div class="config-panel active" id="panel-gpx">
+          <p class="panel-label">Upload your route</p>
+          <p class="panel-sub">We accept .gpx files from Strava, Garmin, Komoot, or any GPS device. Upload your file to get started.</p>
+          <div class="gpx-drop" id="gpx-drop">
+            <div class="gpx-drop-inner">
+              <svg class="gpx-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 15V3m0 0L8 7m4-4l4 4" stroke="#c8b89a" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M3 15v3a2 2 0 002 2h14a2 2 0 002-2v-3" stroke="#c8b89a" stroke-width="1" stroke-linecap="round"/>
+              </svg>
+              <p class="gpx-drop-label">Drop your GPX file here</p>
+              <p class="gpx-drop-sub">or</p>
+              <label class="gpx-browse" for="gpx-input">Browse files</label>
+              <input type="file" id="gpx-input" accept=".gpx" hidden>
+            </div>
+          </div>
+          <div class="gpx-loaded" id="gpx-loaded" hidden>
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M20 6L9 17l-5-5" stroke="#ff6a00" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span id="gpx-filename">route.gpx</span>
+            <button class="gpx-remove" id="gpx-remove">Remove</button>
+          </div>
+          <p class="gpx-privacy">Your GPX data is used only to render your piece and is never stored or shared.</p>
+        </div>
+
+        <!-- COLOUR -->
+        <div class="config-panel" id="panel-colour">
+          <p class="panel-label">Choose a colour</p>
+          <p class="panel-sub">All finishes are matte PLA+. Colours may vary slightly between print batches.</p>
+          <div class="colour-grid">
+            <button class="colour-swatch active" data-colour="#e8e4df" data-name="Bone White" style="background:#e8e4df;" aria-label="Bone White"><span class="colour-check">✓</span></button>
+            <button class="colour-swatch" data-colour="#1a1a18" data-name="Matte Black"  style="background:#1a1a18;" aria-label="Matte Black"><span class="colour-check">✓</span></button>
+            <button class="colour-swatch" data-colour="#c8b89a" data-name="Sand"         style="background:#c8b89a;" aria-label="Sand"><span class="colour-check">✓</span></button>
+            <button class="colour-swatch" data-colour="#6b6860" data-name="Slate"        style="background:#6b6860;" aria-label="Slate"><span class="colour-check">✓</span></button>
+            <button class="colour-swatch" data-colour="#3d2b1f" data-name="Espresso"     style="background:#3d2b1f;" aria-label="Espresso"><span class="colour-check">✓</span></button>
+            <button class="colour-swatch" data-colour="#ff6a00" data-name="Ember"        style="background:#ff6a00;" aria-label="Ember"><span class="colour-check">✓</span></button>
+          </div>
+          <p class="colour-selected-label">Selected: <span id="colour-name">Bone White</span></p>
+        </div>
+
+        <!-- LABEL -->
+        <div class="config-panel" id="panel-label">
+          <p class="panel-label">Add a label</p>
+          <p class="panel-sub">These details are engraved beneath your route. All fields are optional except Route Name.</p>
+          <div class="label-fields">
+
+            <div class="label-group">
+              <label class="label-field-label" for="label-name">Name</label>
+              <input type="text" id="label-name" class="label-input" placeholder="e.g. Matt Clarke" maxlength="40"/>
+            </div>
+
+            <div class="label-group">
+              <label class="label-field-label" for="label-route">Route Name <span class="label-required">*</span></label>
+              <input type="text" id="label-route" class="label-input" placeholder="e.g. Sydney to Wollongong" maxlength="50"/>
+            </div>
+
+            <div class="label-group">
+              <label class="label-field-label" for="label-competition">Competition <span class="label-optional">(optional)</span></label>
+              <input type="text" id="label-competition" class="label-input" placeholder="e.g. Dirty Dozen 2025" maxlength="50"/>
+            </div>
+
+            <div class="label-group">
+              <label class="label-field-label" for="label-desc">Description <span class="label-optional">(optional)</span></label>
+              <input type="text" id="label-desc" class="label-input" placeholder="e.g. 142km · 2,400m elevation" maxlength="60"/>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- GIFTS -->
+        <div class="config-panel" id="panel-gifts">
+          <p class="panel-label">Gift add-ons</p>
+          <p class="panel-sub">Make it the perfect gift. Select any extras to include with your order.</p>
+          <div class="gifts-list">
+
+            <label class="gift-option">
+              <input type="checkbox" class="gift-check" data-gift="message" data-price="0">
+              <div class="gift-info">
+                <span class="gift-name">Personal message card</span>
+                <span class="gift-desc">A handwritten card included with the package</span>
+              </div>
+              <span class="gift-price">Included</span>
+            </label>
+
+            <label class="gift-option">
+              <input type="checkbox" class="gift-check" data-gift="tissue" data-price="0">
+              <div class="gift-info">
+                <span class="gift-name">Tissue wrap</span>
+                <span class="gift-desc">Your piece wrapped in branded tissue paper</span>
+              </div>
+              <span class="gift-price">Included</span>
+            </label>
+
+            <label class="gift-option">
+              <input type="checkbox" class="gift-check" data-gift="wax" data-price="0">
+              <div class="gift-info">
+                <span class="gift-name">Wax-sealed envelope</span>
+                <span class="gift-desc">For your stats card or personal note</span>
+              </div>
+              <span class="gift-price">Included</span>
+            </label>
+
+          </div>
+          <p class="gifts-note">All add-ons are included in the Gift Edition price — no extra charge.</p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── RIGHT PANEL ── -->
+    <div class="config-right">
+
+      <!-- Preview -->
+      <div class="preview-area">
+        <div class="preview-canvas">
+
+          <!-- Placeholder state (before GPX upload) -->
+          <div class="preview-placeholder" id="preview-placeholder">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 15V3m0 0L8 7m4-4l4 4" stroke="#c8b89a" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M3 15v3a2 2 0 002 2h14a2 2 0 002-2v-3" stroke="#c8b89a" stroke-width="1" stroke-linecap="round"/>
+            </svg>
+            <p>Upload your GPX to see your route</p>
+          </div>
+
+          <!-- Live SVG preview (shown after GPX upload) -->
+          <svg id="preview-svg" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:none;">
+            <!-- Grid -->
+            <line x1="0" y1="133" x2="400" y2="133" stroke="#c8b89a" stroke-width="0.4" opacity="0.08"/>
+            <line x1="0" y1="266" x2="400" y2="266" stroke="#c8b89a" stroke-width="0.4" opacity="0.08"/>
+            <line x1="133" y1="0" x2="133" y2="400" stroke="#c8b89a" stroke-width="0.4" opacity="0.08"/>
+            <line x1="266" y1="0" x2="266" y2="400" stroke="#c8b89a" stroke-width="0.4" opacity="0.08"/>
+            <!-- Route -->
+            <path id="preview-route"
+              d="M 60 300 C 110 268 150 232 200 195 C 250 158 290 138 340 118"
+              stroke="#e8e4df" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+            <circle id="preview-dot-start" cx="60"  cy="300" r="5" fill="#e8e4df" opacity="0.5"/>
+            <circle id="preview-dot-end"   cx="340" cy="118" r="7" fill="#ff6a00"/>
+            <!-- Label lines -->
+            <text id="preview-name"        x="200" y="335" text-anchor="middle" font-family="'Cormorant Garamond',serif" font-size="14" fill="#c8b89a" opacity="0.6" letter-spacing="1"></text>
+            <text id="preview-route-name"  x="200" y="354" text-anchor="middle" font-family="'Cormorant Garamond',serif" font-size="17" fill="#c8b89a" opacity="0.8" letter-spacing="1.5" font-style="italic"></text>
+            <text id="preview-competition" x="200" y="371" text-anchor="middle" font-family="'DM Sans',sans-serif"       font-size="11" fill="#c8b89a" opacity="0.4" letter-spacing="2"></text>
+            <text id="preview-desc"        x="200" y="386" text-anchor="middle" font-family="'DM Sans',sans-serif"       font-size="11" fill="#c8b89a" opacity="0.4" letter-spacing="1.5"></text>
+          </svg>
+
+        </div>
+        <p class="preview-hint" id="preview-hint">Upload your GPX file to begin.</p>
+      </div>
+
+      <!-- Order summary -->
+      <div class="order-summary">
+        <p class="summary-label">Order Summary</p>
+        <div class="summary-rows">
+          <div class="summary-row">
+            <span class="summary-key">Tier</span>
+            <span class="summary-val" id="summary-tier">The Print</span>
+          </div>
+          <div class="summary-row">
+            <span class="summary-key">Colour</span>
+            <span class="summary-val" id="summary-colour">Bone White</span>
+          </div>
+          <div class="summary-row">
+            <span class="summary-key">GPX</span>
+            <span class="summary-val" id="summary-gpx">Not uploaded</span>
+          </div>
+          <div class="summary-row" id="summary-row-label" style="display:none;">
+            <span class="summary-key">Route</span>
+            <span class="summary-val" id="summary-route-name">—</span>
+          </div>
+        </div>
+        <div class="summary-total">
+          <span>Total</span>
+          <span id="summary-price">$89</span>
+        </div>
+        <a href="#" class="order-cta">Place Order</a>
+        <p class="order-note">Checkout coming soon — we'll be in touch to confirm your order.</p>
+      </div>
+
+    </div>
+  </main>
+
+</body>
+</html>
