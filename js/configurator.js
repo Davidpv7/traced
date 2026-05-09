@@ -201,7 +201,6 @@ function lockTabs() {
 }
 
 gpxInput.addEventListener('change', () => handleGPX(gpxInput.files[0]));
-gpxDrop.addEventListener('click', () => gpxInput.click());
 gpxDrop.addEventListener('dragover', e => { e.preventDefault(); gpxDrop.classList.add('dragover'); });
 gpxDrop.addEventListener('dragleave', () => gpxDrop.classList.remove('dragover'));
 gpxDrop.addEventListener('drop', e => {
