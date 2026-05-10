@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact — Traced</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=DM+Sans:wght@300;400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/contact.css">
+  <script defer src="js/main.js"></script>
+  <script defer src="js/contact.js"></script>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="nav">
+    <a href="index.html" class="nav-logo">
+      <img src="assests/images/traced_cropped.png" alt="Traced Logo" class="traced-logo">
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="shop.html">Shop</a></li>
+      <li><a href="story.html">Our Story</a></li>
+      <li><a href="contact.html" class="nav-active">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="contact-hero">
+    <div class="contact-hero-content">
+      <p class="contact-eyebrow">Get in Touch</p>
+      <h1 class="contact-title">We'd love to<br /><em>hear from you.</em></h1>
+      <p class="contact-sub">Whether you have a quick question or something bigger in mind — we're here. A real person will read and reply to every message.</p>
+    </div>
+    <div class="contact-hero-rule" aria-hidden="true"></div>
+  </section>
+
+  <!-- FORMS -->
+  <section class="contact-forms">
+    <div class="contact-grid">
+
+      <!-- General enquiries -->
+      <div class="contact-panel reveal">
+        <p class="contact-panel-tag">General Enquiries</p>
+        <h2 class="contact-panel-title">Got a <em>question?</em></h2>
+        <div class="contact-divider"></div>
+        <p class="contact-panel-sub">GPX help, shipping questions, product details — anything at all. We'll get back to you within 24 hours.</p>
+
+        <form class="contact-form" id="form-general" novalidate>
+          <div class="form-field">
+            <label class="form-label" for="general-name">Name</label>
+            <input type="text" id="general-name" class="form-input" placeholder="Your name" required />
+          </div>
+          <div class="form-field">
+            <label class="form-label" for="general-email">Email</label>
+            <input type="email" id="general-email" class="form-input" placeholder="your@email.com" required />
+          </div>
+          <div class="form-field">
+            <label class="form-label" for="general-message">Message</label>
+            <textarea id="general-message" class="form-textarea" placeholder="What's on your mind?" required></textarea>
+          </div>
+          <button type="submit" class="form-cta">Send Message</button>
+          <p class="form-status" id="general-status"></p>
+        </form>
+      </div>
+
+      <!-- Special requests -->
+      <div class="contact-panel contact-panel-alt reveal reveal-delay-1">
+        <p class="contact-panel-tag">Special Requests</p>
+        <h2 class="contact-panel-title">Something bigger<br /><em>in mind?</em></h2>
+        <div class="contact-divider"></div>
+        <p class="contact-panel-sub">Bulk orders, corporate gifts, club commemoratives, or something our configurator doesn't cover — let's plan it together.</p>
+
+        <form class="contact-form" id="form-special" novalidate>
+          <div class="form-field">
+            <label class="form-label" for="special-name">Name</label>
+            <input type="text" id="special-name" class="form-input" placeholder="Your name" required />
+          </div>
+          <div class="form-field-row">
+            <div class="form-field">
+              <label class="form-label" for="special-company">Company <span class="form-optional">(optional)</span></label>
+              <input type="text" id="special-company" class="form-input" placeholder="Organisation" />
+            </div>
+            <div class="form-field">
+              <label class="form-label" for="special-quantity">Quantity</label>
+              <input type="text" id="special-quantity" class="form-input" placeholder="e.g. 20 pieces" />
+            </div>
+          </div>
+          <div class="form-field">
+            <label class="form-label" for="special-email">Email</label>
+            <input type="email" id="special-email" class="form-input" placeholder="your@email.com" required />
+          </div>
+          <div class="form-field">
+            <label class="form-label" for="special-message">Tell us about your request</label>
+            <textarea id="special-message" class="form-textarea" placeholder="What are you after? The more detail, the better." required></textarea>
+          </div>
+          <button type="submit" class="form-cta">Send Request</button>
+          <p class="form-status" id="special-status"></p>
+        </form>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- INFO STRIP -->
+  <section class="contact-info">
+    <div class="contact-info-inner">
+      <div class="contact-info-item reveal">
+        <span class="contact-info-label">Based in</span>
+        <span class="contact-info-val">Sydney, Australia</span>
+      </div>
+      <div class="contact-info-divider"></div>
+      <div class="contact-info-item reveal reveal-delay-1">
+        <span class="contact-info-label">Response time</span>
+        <span class="contact-info-val">Within 24 hours</span>
+      </div>
+      <div class="contact-info-divider"></div>
+      <div class="contact-info-item reveal reveal-delay-2">
+        <span class="contact-info-label">Instagram</span>
+        <a href="https://www.instagram.com/traced.au/" target="_blank" rel="noopener noreferrer" class="contact-info-val contact-info-link">@traced.au</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="footer-logo">Traced</span>
+    <span class="footer-copy">© 2026 Traced. All rights reserved.</span>
+  </footer>
+
+</body>
+</html>

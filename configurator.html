@@ -19,19 +19,19 @@
       <img src="assests/images/traced_cropped.png" alt="Traced Logo" class="traced-logo">
     </a>
     <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
       <li><a href="shop.html">Shop</a></li>
-      <li><a href="#">Our Story</a></li>
-      <li><a href="#">Contact</a></li>
+      <li><a href="story.html">Our Story</a></li>
+      <li><a href="contact.html">Contact</a></li>
     </ul>
   </nav>
 
   <!-- CONFIGURATOR -->
   <main class="configurator">
 
-    <!-- ── LEFT PANEL ── -->
+    <!-- LEFT PANEL -->
     <div class="config-left">
 
-      <!-- Header -->
       <div class="config-header">
         <p class="config-eyebrow">Configure Your Piece</p>
         <h1 class="config-title">Make it <em>yours.</em></h1>
@@ -55,10 +55,9 @@
 
       <!-- Tabs -->
       <div class="config-tabs" role="tablist">
-        <button class="config-tab active" data-tab="gpx"    role="tab">GPX</button>
-        <button class="config-tab locked" data-tab="colour" role="tab">Colour</button>
-        <button class="config-tab locked tier-tab" data-tab="label"  role="tab" data-min-tier="framed">Label</button>
-        <button class="config-tab locked tier-tab" data-tab="gifts"  role="tab" data-min-tier="gift">Gifts</button>
+        <button class="config-tab active" data-tab="gpx" role="tab">GPX</button>
+        <button class="config-tab locked tier-tab" data-tab="label" role="tab" data-min-tier="framed">Label</button>
+        <button class="config-tab locked tier-tab" data-tab="gifts" role="tab" data-min-tier="gift">Gifts</button>
       </div>
 
       <!-- Panels -->
@@ -67,7 +66,7 @@
         <!-- GPX -->
         <div class="config-panel active" id="panel-gpx">
           <p class="panel-label">Upload your route</p>
-          <p class="panel-sub">We accept .gpx files from Strava, Garmin, Komoot, or any GPS device. Upload your file to get started.</p>
+          <p class="panel-sub">We accept .gpx files from Strava, Garmin, Komoot, or any GPS device. Your stats will be pulled automatically.</p>
           <div class="gpx-drop" id="gpx-drop">
             <div class="gpx-drop-inner">
               <svg class="gpx-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -90,45 +89,47 @@
           <p class="gpx-privacy">Your GPX data is used only to render your piece and is never stored or shared.</p>
         </div>
 
-        <!-- COLOUR -->
-        <div class="config-panel" id="panel-colour">
-          <p class="panel-label">Choose a colour</p>
-          <p class="panel-sub">All finishes are matte PLA+. Colours may vary slightly between print batches.</p>
-          <div class="colour-grid">
-            <button class="colour-swatch active" data-colour="#e8e4df" data-name="Bone White" style="background:#e8e4df;" aria-label="Bone White"><span class="colour-check">✓</span></button>
-            <button class="colour-swatch" data-colour="#1a1a18" data-name="Matte Black"  style="background:#1a1a18;" aria-label="Matte Black"><span class="colour-check">✓</span></button>
-            <button class="colour-swatch" data-colour="#c8b89a" data-name="Sand"         style="background:#c8b89a;" aria-label="Sand"><span class="colour-check">✓</span></button>
-            <button class="colour-swatch" data-colour="#6b6860" data-name="Slate"        style="background:#6b6860;" aria-label="Slate"><span class="colour-check">✓</span></button>
-            <button class="colour-swatch" data-colour="#3d2b1f" data-name="Espresso"     style="background:#3d2b1f;" aria-label="Espresso"><span class="colour-check">✓</span></button>
-            <button class="colour-swatch" data-colour="#ff6a00" data-name="Ember"        style="background:#ff6a00;" aria-label="Ember"><span class="colour-check">✓</span></button>
-          </div>
-          <p class="colour-selected-label">Selected: <span id="colour-name">Bone White</span></p>
-        </div>
-
         <!-- LABEL -->
         <div class="config-panel" id="panel-label">
-          <p class="panel-label">Add a label</p>
-          <p class="panel-sub">These details are engraved beneath your route. All fields are optional except Route Name.</p>
+          <p class="panel-label">Personalise your piece</p>
+          <p class="panel-sub">These details appear on your framed print. Stats are pulled from your GPX — edit them freely.</p>
           <div class="label-fields">
 
             <div class="label-group">
-              <label class="label-field-label" for="label-name">Name</label>
-              <input type="text" id="label-name" class="label-input" placeholder="e.g. Matt Clarke" maxlength="40"/>
+              <label class="label-field-label" for="label-title">Event / Route Title</label>
+              <input type="text" id="label-title" class="label-input" placeholder="e.g. Pedal or Die" maxlength="30"/>
             </div>
 
             <div class="label-group">
-              <label class="label-field-label" for="label-route">Route Name <span class="label-required">*</span></label>
-              <input type="text" id="label-route" class="label-input" placeholder="e.g. Sydney to Wollongong" maxlength="50"/>
+              <label class="label-field-label" for="label-subtitle">Location / Subtitle <span class="label-optional">(optional)</span></label>
+              <input type="text" id="label-subtitle" class="label-input" placeholder="e.g. New Zealand" maxlength="30"/>
             </div>
 
             <div class="label-group">
-              <label class="label-field-label" for="label-competition">Competition <span class="label-optional">(optional)</span></label>
-              <input type="text" id="label-competition" class="label-input" placeholder="e.g. Dirty Dozen 2025" maxlength="50"/>
+              <label class="label-field-label" for="label-name">Your Name <span class="label-optional">(optional)</span></label>
+              <input type="text" id="label-name" class="label-input" placeholder="e.g. Fernando Celis" maxlength="40"/>
             </div>
 
-            <div class="label-group">
-              <label class="label-field-label" for="label-desc">Description <span class="label-optional">(optional)</span></label>
-              <input type="text" id="label-desc" class="label-input" placeholder="e.g. 142km · 2,400m elevation" maxlength="60"/>
+            <div class="label-group-row">
+              <div class="label-group">
+                <label class="label-field-label" for="label-date">Date <span class="label-optional">(optional)</span></label>
+                <input type="text" id="label-date" class="label-input" placeholder="e.g. Oct 26 2025" maxlength="20"/>
+              </div>
+              <div class="label-group">
+                <label class="label-field-label" for="label-distance">Distance <span class="label-optional">(optional)</span></label>
+                <input type="text" id="label-distance" class="label-input" placeholder="e.g. 123 km" maxlength="15"/>
+              </div>
+            </div>
+
+            <div class="label-group-row">
+              <div class="label-group">
+                <label class="label-field-label" for="label-place">Place <span class="label-optional">(optional)</span></label>
+                <input type="text" id="label-place" class="label-input" placeholder="e.g. Queenstown" maxlength="20"/>
+              </div>
+              <div class="label-group">
+                <label class="label-field-label" for="label-elevation">Elevation <span class="label-optional">(optional)</span></label>
+                <input type="text" id="label-elevation" class="label-input" placeholder="e.g. 3,070 m" maxlength="15"/>
+              </div>
             </div>
 
           </div>
@@ -137,83 +138,101 @@
         <!-- GIFTS -->
         <div class="config-panel" id="panel-gifts">
           <p class="panel-label">Gift add-ons</p>
-          <p class="panel-sub">Make it the perfect gift. Select any extras to include with your order.</p>
+          <p class="panel-sub">Make it the perfect gift. All extras are included in the Gift Edition price.</p>
           <div class="gifts-list">
-
             <label class="gift-option">
-              <input type="checkbox" class="gift-check" data-gift="message" data-price="0">
+              <input type="checkbox" class="gift-check" data-gift="message">
               <div class="gift-info">
                 <span class="gift-name">Personal message card</span>
                 <span class="gift-desc">A handwritten card included with the package</span>
               </div>
               <span class="gift-price">Included</span>
             </label>
-
             <label class="gift-option">
-              <input type="checkbox" class="gift-check" data-gift="tissue" data-price="0">
+              <input type="checkbox" class="gift-check" data-gift="tissue">
               <div class="gift-info">
                 <span class="gift-name">Tissue wrap</span>
                 <span class="gift-desc">Your piece wrapped in branded tissue paper</span>
               </div>
               <span class="gift-price">Included</span>
             </label>
-
             <label class="gift-option">
-              <input type="checkbox" class="gift-check" data-gift="wax" data-price="0">
+              <input type="checkbox" class="gift-check" data-gift="wax">
               <div class="gift-info">
                 <span class="gift-name">Wax-sealed envelope</span>
                 <span class="gift-desc">For your stats card or personal note</span>
               </div>
               <span class="gift-price">Included</span>
             </label>
-
           </div>
-          <p class="gifts-note">All add-ons are included in the Gift Edition price — no extra charge.</p>
         </div>
 
       </div>
     </div>
 
-    <!-- ── RIGHT PANEL ── -->
+    <!-- RIGHT PANEL -->
     <div class="config-right">
 
       <!-- Preview -->
       <div class="preview-area">
-        <div class="preview-canvas">
 
-          <!-- Placeholder state (before GPX upload) -->
-          <div class="preview-placeholder" id="preview-placeholder">
-            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 15V3m0 0L8 7m4-4l4 4" stroke="#c8b89a" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M3 15v3a2 2 0 002 2h14a2 2 0 002-2v-3" stroke="#c8b89a" stroke-width="1" stroke-linecap="round"/>
-            </svg>
-            <p>Upload your GPX to see your route</p>
-          </div>
-
-          <!-- Live SVG preview (shown after GPX upload) -->
-          <svg id="preview-svg" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:none;">
-            <!-- Grid -->
-            <line x1="0" y1="133" x2="400" y2="133" stroke="#c8b89a" stroke-width="0.4" opacity="0.08"/>
-            <line x1="0" y1="266" x2="400" y2="266" stroke="#c8b89a" stroke-width="0.4" opacity="0.08"/>
-            <line x1="133" y1="0" x2="133" y2="400" stroke="#c8b89a" stroke-width="0.4" opacity="0.08"/>
-            <line x1="266" y1="0" x2="266" y2="400" stroke="#c8b89a" stroke-width="0.4" opacity="0.08"/>
-            <!-- Route -->
-            <path id="preview-route"
-              d="M 60 300 C 110 268 150 232 200 195 C 250 158 290 138 340 118"
-              stroke="#e8e4df" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-            <circle id="preview-dot-start" cx="60"  cy="300" r="5" fill="#e8e4df" opacity="0.5"/>
-            <circle id="preview-dot-end"   cx="340" cy="118" r="7" fill="#ff6a00"/>
-            <!-- Label lines -->
-            <text id="preview-name"        x="200" y="335" text-anchor="middle" font-family="'Cormorant Garamond',serif" font-size="14" fill="#c8b89a" opacity="0.6" letter-spacing="1"></text>
-            <text id="preview-route-name"  x="200" y="354" text-anchor="middle" font-family="'Cormorant Garamond',serif" font-size="17" fill="#c8b89a" opacity="0.8" letter-spacing="1.5" font-style="italic"></text>
-            <text id="preview-competition" x="200" y="371" text-anchor="middle" font-family="'DM Sans',sans-serif"       font-size="11" fill="#c8b89a" opacity="0.4" letter-spacing="2"></text>
-            <text id="preview-desc"        x="200" y="386" text-anchor="middle" font-family="'DM Sans',sans-serif"       font-size="11" fill="#c8b89a" opacity="0.4" letter-spacing="1.5"></text>
+        <!-- Placeholder -->
+        <div class="preview-placeholder" id="preview-placeholder">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 15V3m0 0L8 7m4-4l4 4" stroke="#c8b89a" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M3 15v3a2 2 0 002 2h14a2 2 0 002-2v-3" stroke="#c8b89a" stroke-width="1" stroke-linecap="round"/>
           </svg>
-
+          <p>Upload your GPX to see your route</p>
         </div>
+
+        <!-- Tier 1 preview -->
+        <div class="product-preview" id="preview-tier1" style="display:none;">
+          <div class="print-frame tier1-frame">
+            <svg id="t1-svg" viewBox="0 0 280 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <polygon id="t1-hex-bg" points="140,14 252,77 252,203 140,266 28,203 28,77" fill="#1a3a2a" stroke="#111" stroke-width="1.5"/>
+              <polygon points="140,28 238,84 238,196 140,252 42,196 42,84" fill="#1e4030"/>
+              <polygon points="140,42 224,91 224,189 140,238 56,189 56,91" fill="#224835"/>
+              <path id="t1-route" d="" stroke="#ff6a00" stroke-width="3" stroke-linecap="round" fill="none"/>
+              <circle id="t1-dot-start" cx="0" cy="0" r="5" fill="#ff6a00" opacity="0.6"/>
+              <circle id="t1-dot-end" cx="0" cy="0" r="7" fill="#ff6a00"/>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Tier 2/3 preview -->
+        <div class="product-preview" id="preview-tier2" style="display:none;">
+          <div class="print-frame tier2-frame">
+            <div class="print-inner">
+
+              <div class="print-top">
+                <p class="print-title" id="print-title">YOUR ROUTE</p>
+                <p class="print-subtitle" id="print-subtitle"></p>
+              </div>
+
+              <div class="print-hex-wrap">
+                <svg id="t2-svg" viewBox="0 0 240 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <polygon points="120,12 216,66 216,174 120,228 24,174 24,66" fill="#1a3a2a" stroke="#111" stroke-width="1.5"/>
+                  <polygon points="120,26 204,73 204,167 120,214 36,167 36,73" fill="#1e4030"/>
+                  <polygon points="120,40 192,80 192,160 120,200 48,160 48,80" fill="#224835"/>
+                  <path id="t2-route" d="" stroke="#ff6a00" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+                  <circle id="t2-dot-start" cx="0" cy="0" r="4" fill="#ff6a00" opacity="0.6"/>
+                  <circle id="t2-dot-end" cx="0" cy="0" r="6" fill="#ff6a00"/>
+                </svg>
+              </div>
+
+              <p class="print-name" id="print-name"></p>
+
+              <div class="print-stats" id="print-stats">
+                <!-- dynamically rendered -->
+              </div>
+
+            </div>
+          </div>
+        </div>
+
         <p class="preview-hint" id="preview-hint">Upload your GPX file to begin.</p>
 
-        <!-- Stats strip — hidden until GPX uploaded -->
+        <!-- Route stats strip -->
         <div class="route-stats" id="route-stats" style="display:none;">
           <div class="stat">
             <span class="stat-value" id="stat-distance">—</span>
@@ -230,6 +249,7 @@
             <span class="stat-label">Duration</span>
           </div>
         </div>
+
       </div>
 
       <!-- Order summary -->
@@ -241,16 +261,12 @@
             <span class="summary-val" id="summary-tier">The Print</span>
           </div>
           <div class="summary-row">
-            <span class="summary-key">Colour</span>
-            <span class="summary-val" id="summary-colour">Bone White</span>
-          </div>
-          <div class="summary-row">
             <span class="summary-key">GPX</span>
             <span class="summary-val" id="summary-gpx">Not uploaded</span>
           </div>
-          <div class="summary-row" id="summary-row-label" style="display:none;">
+          <div class="summary-row" id="summary-row-route" style="display:none;">
             <span class="summary-key">Route</span>
-            <span class="summary-val" id="summary-route-name">—</span>
+            <span class="summary-val" id="summary-route">—</span>
           </div>
         </div>
         <div class="summary-total">

@@ -7,11 +7,9 @@ window.addEventListener('scroll', () => {
 // ── STATE ────────────────────────────────────────────
 const params = new URLSearchParams(window.location.search);
 const config = {
-  tier:        params.get('tier') || 'print',
-  colour:      '#e8e4df',
-  colourName:  'Bone White',
-  gpx:         null,
-  label:       { name: '', route: '', competition: '', desc: '' },
+  tier: params.get('tier') || 'print',
+  gpx:  null,
+  label: { title: '', subtitle: '', name: '', date: '', distance: '', place: '', elevation: '' },
 };
 
 const basePrices = { print: 89, framed: 109, gift: 129 };
@@ -19,24 +17,22 @@ const tierNames  = { print: 'The Print', framed: 'The Print + Frame', gift: 'The
 const tierOrder  = ['print', 'framed', 'gift'];
 
 // ── TIER SELECTOR ────────────────────────────────────
-const tierBtns = document.querySelectorAll('.tier-btn');
-
 function setTier(tier) {
   config.tier = tier;
-  tierBtns.forEach(b => b.classList.toggle('active', b.dataset.tier === tier));
+  document.querySelectorAll('.tier-btn').forEach(b => b.classList.toggle('active', b.dataset.tier === tier));
   updateTabVisibility();
+  updatePreviewMode();
   updateSummary();
 }
 
-tierBtns.forEach(btn => {
+document.querySelectorAll('.tier-btn').forEach(btn => {
   btn.addEventListener('click', () => setTier(btn.dataset.tier));
 });
 
-// ── TAB VISIBILITY BY TIER ───────────────────────────
+// ── TAB VISIBILITY ───────────────────────────────────
 function updateTabVisibility() {
   document.querySelectorAll('.tier-tab').forEach(tab => {
-    const minTier = tab.dataset.minTier;
-    const allowed = tierOrder.indexOf(config.tier) >= tierOrder.indexOf(minTier);
+    const allowed = tierOrder.indexOf(config.tier) >= tierOrder.indexOf(tab.dataset.minTier);
     tab.classList.toggle('hidden', !allowed);
   });
 }
@@ -66,138 +62,19 @@ function handleGPX(file) {
   if (!file || !file.name.endsWith('.gpx')) return;
   config.gpx = file;
   gpxFilename.textContent = file.name;
-  gpxDrop.hidden   = true;
-  gpxLoaded.hidden = false;
+  gpxDrop.hidden    = true;
+  gpxLoaded.hidden  = false;
   unlockTabs();
   updateSummary();
   parseAndRenderGPX(file);
 }
 
-// ── GPX PARSING & RENDERING ──────────────────────────
-function parseAndRenderGPX(file) {
-  const reader = new FileReader();
-  reader.onload = e => {
-    const xml    = new DOMParser().parseFromString(e.target.result, 'application/xml');
-
-    // Grab all trackpoints — try trkpt first, then rtept for routes
-    let points = Array.from(xml.querySelectorAll('trkpt'));
-    if (points.length === 0) points = Array.from(xml.querySelectorAll('rtept'));
-    if (points.length === 0) points = Array.from(xml.querySelectorAll('wpt'));
-    if (points.length === 0) return;
-
-    // Extract lat/lon
-    const coords = points.map(pt => ({
-      lat: parseFloat(pt.getAttribute('lat')),
-      lon: parseFloat(pt.getAttribute('lon')),
-    }));
-
-    // Simplify — keep every Nth point so the SVG path isn't enormous
-    const maxPoints = 300;
-    const step      = Math.max(1, Math.floor(coords.length / maxPoints));
-    const simplified = coords.filter((_, i) => i % step === 0);
-
-    // Find bounds
-    const lats = simplified.map(c => c.lat);
-    const lons = simplified.map(c => c.lon);
-    const minLat = Math.min(...lats), maxLat = Math.max(...lats);
-    const minLon = Math.min(...lons), maxLon = Math.max(...lons);
-
-    // Map to SVG canvas (400×400 viewBox, with padding)
-    const pad    = 40;
-    const width  = 400 - pad * 2;
-    const height = 300 - pad * 2; // leave bottom space for labels
-
-    const latRange = maxLat - minLat || 0.001;
-    const lonRange = maxLon - minLon || 0.001;
-
-    // Preserve aspect ratio
-    const scale  = Math.min(width / lonRange, height / latRange);
-    const offX   = pad + (width  - lonRange * scale) / 2;
-    const offY   = pad + (height - latRange * scale) / 2;
-
-    function toSVG(coord) {
-      return {
-        x: offX + (coord.lon - minLon) * scale,
-        // Invert Y — latitude increases upward, SVG Y increases downward
-        y: offY + (maxLat - coord.lat) * scale,
-      };
-    }
-
-    // Build SVG path string
-    const svgPoints = simplified.map(toSVG);
-    const d = svgPoints.map((p, i) => `${i === 0 ? 'M' : 'L'} ${p.x.toFixed(1)} ${p.y.toFixed(1)}`).join(' ');
-
-    // Update the route path and dots
-    const routePath = document.getElementById('preview-route');
-    routePath.setAttribute('d', d);
-
-    const dotStart = document.getElementById('preview-dot-start');
-    dotStart.setAttribute('cx', svgPoints[0].x.toFixed(1));
-    dotStart.setAttribute('cy', svgPoints[0].y.toFixed(1));
-
-    const dotEnd = document.getElementById('preview-dot-end');
-    const last   = svgPoints[svgPoints.length - 1];
-    dotEnd.setAttribute('cx', last.x.toFixed(1));
-    dotEnd.setAttribute('cy', last.y.toFixed(1));
-
-    // ── STATS ──────────────────────────────────────────
-    // Distance — Haversine formula between consecutive points
-    function haversine(a, b) {
-      const R    = 6371000; // Earth radius in metres
-      const dLat = (b.lat - a.lat) * Math.PI / 180;
-      const dLon = (b.lon - a.lon) * Math.PI / 180;
-      const x    = Math.sin(dLat/2) * Math.sin(dLat/2)
-                 + Math.cos(a.lat * Math.PI/180) * Math.cos(b.lat * Math.PI/180)
-                 * Math.sin(dLon/2) * Math.sin(dLon/2);
-      return R * 2 * Math.atan2(Math.sqrt(x), Math.sqrt(1 - x));
-    }
-
-    let totalMetres = 0;
-    for (let i = 1; i < coords.length; i++) {
-      totalMetres += haversine(coords[i - 1], coords[i]);
-    }
-    const distanceKm = (totalMetres / 1000).toFixed(1);
-
-    // Elevation gain — sum of all positive ascents
-    const elevEls = points.map(pt => parseFloat(pt.querySelector('ele')?.textContent || '0'));
-    let elevGain  = 0;
-    for (let i = 1; i < elevEls.length; i++) {
-      const diff = elevEls[i] - elevEls[i - 1];
-      if (diff > 0) elevGain += diff;
-    }
-
-    // Duration — from first to last timestamp if available
-    const times = points.map(pt => pt.querySelector('time')?.textContent).filter(Boolean);
-    let durationStr = '—';
-    if (times.length >= 2) {
-      const ms      = new Date(times[times.length - 1]) - new Date(times[0]);
-      const totalMin= Math.round(ms / 60000);
-      const hrs     = Math.floor(totalMin / 60);
-      const mins    = totalMin % 60;
-      durationStr   = hrs > 0 ? `${hrs}h ${mins}m` : `${mins}m`;
-    }
-
-    // Render stats
-    document.getElementById('stat-distance').textContent  = `${distanceKm} km`;
-    document.getElementById('stat-elevation').textContent = elevGain > 0 ? `${Math.round(elevGain)} m` : '—';
-    document.getElementById('stat-duration').textContent  = durationStr;
-    document.getElementById('route-stats').style.display  = 'flex';
-
-    showPreview();
-  };
-  reader.readAsText(file);
-}
-
 function unlockTabs() {
-  tabs.forEach(tab => {
-    if (tab.dataset.tab !== 'gpx') tab.classList.remove('locked');
-  });
+  tabs.forEach(tab => { if (tab.dataset.tab !== 'gpx') tab.classList.remove('locked'); });
 }
 
 function lockTabs() {
-  tabs.forEach(tab => {
-    if (tab.dataset.tab !== 'gpx') tab.classList.add('locked');
-  });
+  tabs.forEach(tab => { if (tab.dataset.tab !== 'gpx') tab.classList.add('locked'); });
 }
 
 gpxInput.addEventListener('change', () => handleGPX(gpxInput.files[0]));
@@ -210,87 +87,242 @@ gpxDrop.addEventListener('drop', e => {
 });
 
 gpxRemove.addEventListener('click', () => {
-  config.gpx      = null;
-  gpxInput.value  = '';
-  gpxDrop.hidden  = false;
-  gpxLoaded.hidden= true;
+  config.gpx       = null;
+  gpxInput.value   = '';
+  gpxDrop.hidden   = false;
+  gpxLoaded.hidden = true;
   lockTabs();
-  hidePreview();
+  hidePreviews();
   document.getElementById('route-stats').style.display = 'none';
   updateSummary();
 });
 
-// ── COLOUR ───────────────────────────────────────────
-document.querySelectorAll('.colour-swatch').forEach(swatch => {
-  swatch.addEventListener('click', () => {
-    document.querySelectorAll('.colour-swatch').forEach(s => s.classList.remove('active'));
-    swatch.classList.add('active');
-    config.colour     = swatch.dataset.colour;
-    config.colourName = swatch.dataset.name;
-    document.getElementById('colour-name').textContent = config.colourName;
-    updatePreviewColour();
+// ── GPX PARSING ──────────────────────────────────────
+function parseAndRenderGPX(file) {
+  const reader = new FileReader();
+  reader.onload = e => {
+    const xml    = new DOMParser().parseFromString(e.target.result, 'application/xml');
+    let points   = Array.from(xml.querySelectorAll('trkpt'));
+    if (!points.length) points = Array.from(xml.querySelectorAll('rtept'));
+    if (!points.length) points = Array.from(xml.querySelectorAll('wpt'));
+    if (!points.length) return;
+
+    const coords = points.map(pt => ({
+      lat: parseFloat(pt.getAttribute('lat')),
+      lon: parseFloat(pt.getAttribute('lon')),
+      ele: parseFloat(pt.querySelector('ele')?.textContent || '0'),
+      time: pt.querySelector('time')?.textContent || null,
+    }));
+
+    // ── STATS ─────────────────────────────────────────
+    function haversine(a, b) {
+      const R = 6371000;
+      const dLat = (b.lat - a.lat) * Math.PI / 180;
+      const dLon = (b.lon - a.lon) * Math.PI / 180;
+      const x = Math.sin(dLat/2)**2 + Math.cos(a.lat*Math.PI/180)*Math.cos(b.lat*Math.PI/180)*Math.sin(dLon/2)**2;
+      return R * 2 * Math.atan2(Math.sqrt(x), Math.sqrt(1-x));
+    }
+
+    let totalMetres = 0;
+    for (let i = 1; i < coords.length; i++) totalMetres += haversine(coords[i-1], coords[i]);
+    const distanceKm = (totalMetres / 1000).toFixed(1);
+
+    let elevGain = 0;
+    for (let i = 1; i < coords.length; i++) {
+      const diff = coords[i].ele - coords[i-1].ele;
+      if (diff > 0) elevGain += diff;
+    }
+
+    const times = coords.map(c => c.time).filter(Boolean);
+    let durationStr = '—';
+    if (times.length >= 2) {
+      const ms  = new Date(times[times.length-1]) - new Date(times[0]);
+      const min = Math.round(ms / 60000);
+      const hrs = Math.floor(min / 60);
+      const rem = min % 60;
+      durationStr = hrs > 0 ? `${hrs}h ${rem}m` : `${rem}m`;
+    }
+
+    // Auto-fill label fields
+    const distStr = `${distanceKm} km`;
+    const elevStr = elevGain > 0 ? `${Math.round(elevGain)} m` : '';
+
+    document.getElementById('label-distance').value  = distStr;
+    document.getElementById('label-elevation').value = elevStr;
+    config.label.distance  = distStr;
+    config.label.elevation = elevStr;
+
+    // Today's date as default
+    if (!config.label.date) {
+      const today = new Date();
+      const dateStr = today.toLocaleDateString('en-AU', { day: 'numeric', month: 'short', year: 'numeric' });
+      document.getElementById('label-date').value = dateStr;
+      config.label.date = dateStr;
+    }
+
+    // Stats strip
+    document.getElementById('stat-distance').textContent  = distStr;
+    document.getElementById('stat-elevation').textContent = elevGain > 0 ? `${Math.round(elevGain)} m` : '—';
+    document.getElementById('stat-duration').textContent  = durationStr;
+    document.getElementById('route-stats').style.display  = 'flex';
+
+    // ── ROUTE PATH ────────────────────────────────────
+    const step       = Math.max(1, Math.floor(coords.length / 300));
+    const simplified = coords.filter((_, i) => i % step === 0);
+
+    const lats   = simplified.map(c => c.lat);
+    const lons   = simplified.map(c => c.lon);
+    const minLat = Math.min(...lats), maxLat = Math.max(...lats);
+    const minLon = Math.min(...lons), maxLon = Math.max(...lons);
+    const latRange = maxLat - minLat || 0.001;
+    const lonRange = maxLon - minLon || 0.001;
+
+    // Map for Tier 1 (280x280 viewBox, hex roughly 28-252 x 14-266)
+    function toSVG1(coord) {
+      const pad = 50; const w = 280 - pad*2; const h = 280 - pad*2;
+      const scale = Math.min(w / lonRange, h / latRange);
+      return {
+        x: pad + (w - lonRange*scale)/2 + (coord.lon - minLon)*scale,
+        y: pad + (h - latRange*scale)/2 + (maxLat - coord.lat)*scale,
+      };
+    }
+
+    // Map for Tier 2 (240x240 viewBox, hex roughly 24-216 x 12-228)
+    function toSVG2(coord) {
+      const pad = 45; const w = 240 - pad*2; const h = 240 - pad*2;
+      const scale = Math.min(w / lonRange, h / latRange);
+      return {
+        x: pad + (w - lonRange*scale)/2 + (coord.lon - minLon)*scale,
+        y: pad + (h - latRange*scale)/2 + (maxLat - coord.lat)*scale,
+      };
+    }
+
+    function buildPath(pts) {
+      return pts.map((p, i) => `${i===0?'M':'L'} ${p.x.toFixed(1)} ${p.y.toFixed(1)}`).join(' ');
+    }
+
+    const pts1 = simplified.map(toSVG1);
+    const pts2 = simplified.map(toSVG2);
+    const d1   = buildPath(pts1);
+    const d2   = buildPath(pts2);
+
+    // Tier 1
+    document.getElementById('t1-route').setAttribute('d', d1);
+    document.getElementById('t1-dot-start').setAttribute('cx', pts1[0].x.toFixed(1));
+    document.getElementById('t1-dot-start').setAttribute('cy', pts1[0].y.toFixed(1));
+    document.getElementById('t1-dot-end').setAttribute('cx', pts1[pts1.length-1].x.toFixed(1));
+    document.getElementById('t1-dot-end').setAttribute('cy', pts1[pts1.length-1].y.toFixed(1));
+
+    // Tier 2
+    document.getElementById('t2-route').setAttribute('d', d2);
+    document.getElementById('t2-dot-start').setAttribute('cx', pts2[0].x.toFixed(1));
+    document.getElementById('t2-dot-start').setAttribute('cy', pts2[0].y.toFixed(1));
+    document.getElementById('t2-dot-end').setAttribute('cx', pts2[pts2.length-1].x.toFixed(1));
+    document.getElementById('t2-dot-end').setAttribute('cy', pts2[pts2.length-1].y.toFixed(1));
+
+    showPreview();
+    renderStats();
+  };
+  reader.readAsText(file);
+}
+
+// ── LABEL INPUTS ─────────────────────────────────────
+const labelFields = ['title', 'subtitle', 'name', 'date', 'distance', 'place', 'elevation'];
+labelFields.forEach(field => {
+  const el = document.getElementById(`label-${field}`);
+  if (!el) return;
+  el.addEventListener('input', () => {
+    config.label[field] = el.value;
+    if (field === 'title')    document.getElementById('print-title').textContent    = el.value || 'YOUR ROUTE';
+    if (field === 'subtitle') document.getElementById('print-subtitle').textContent = el.value;
+    if (field === 'name')     document.getElementById('print-name').textContent     = el.value;
+    renderStats();
     updateSummary();
   });
 });
 
-// ── LABEL FIELDS ─────────────────────────────────────
-document.getElementById('label-name').addEventListener('input', e => {
-  config.label.name = e.target.value;
-  document.getElementById('preview-name').textContent = e.target.value;
-});
-document.getElementById('label-route').addEventListener('input', e => {
-  config.label.route = e.target.value;
-  document.getElementById('preview-route-name').textContent = e.target.value;
-  updateSummary();
-});
-document.getElementById('label-competition').addEventListener('input', e => {
-  config.label.competition = e.target.value;
-  document.getElementById('preview-competition').textContent = e.target.value;
-});
-document.getElementById('label-desc').addEventListener('input', e => {
-  config.label.desc = e.target.value;
-  document.getElementById('preview-desc').textContent = e.target.value;
-});
+// ── RENDER STATS DYNAMICALLY ─────────────────────────
+function renderStats() {
+  const statsEl = document.getElementById('print-stats');
+  if (!statsEl) return;
 
-// ── PREVIEW ──────────────────────────────────────────
-const previewPlaceholder = document.getElementById('preview-placeholder');
-const previewSVG         = document.getElementById('preview-svg');
-const previewHint        = document.getElementById('preview-hint');
+  const entries = [
+    { key: 'date',      label: 'Date',      icon: '📅' },
+    { key: 'distance',  label: 'Distance',  icon: '↗' },
+    { key: 'place',     label: 'Place',     icon: '📍' },
+    { key: 'elevation', label: 'Elevation', icon: '▲' },
+  ].filter(e => config.label[e.key] && config.label[e.key].trim() !== '');
+
+  if (entries.length === 0) {
+    statsEl.innerHTML = '';
+    statsEl.style.borderTop = 'none';
+    statsEl.style.paddingTop = '0';
+    return;
+  }
+
+  statsEl.style.borderTop = '0.5px solid #ccc';
+  statsEl.style.paddingTop = '6px';
+  statsEl.innerHTML = entries.map(e => `
+    <div class="print-stat">
+      <span class="print-stat-icon">${e.icon}</span>
+      <span class="print-stat-lbl">${e.label}</span>
+      <span class="print-stat-val">${config.label[e.key]}</span>
+    </div>
+  `).join('');
+}
+
+// ── PREVIEW VISIBILITY ───────────────────────────────
+function hidePreviews() {
+  document.getElementById('preview-placeholder').style.display = 'flex';
+  document.getElementById('preview-tier1').style.display       = 'none';
+  document.getElementById('preview-tier2').style.display       = 'none';
+  document.getElementById('preview-hint').textContent          = 'Upload your GPX file to begin.';
+}
 
 function showPreview() {
-  previewPlaceholder.style.display = 'none';
-  previewSVG.style.display         = 'block';
-  previewHint.textContent          = 'Preview is illustrative — your GPX route will render here.';
-  updatePreviewColour();
+  document.getElementById('preview-placeholder').style.display = 'none';
+  document.getElementById('preview-hint').textContent          = 'Preview is illustrative — your GPX route will render here.';
+  updatePreviewMode();
 }
 
-function hidePreview() {
-  previewPlaceholder.style.display = 'flex';
-  previewSVG.style.display         = 'none';
-  previewHint.textContent          = 'Upload your GPX file to begin.';
-}
-
-function updatePreviewColour() {
-  document.getElementById('preview-route').setAttribute('stroke', config.colour);
-  document.getElementById('preview-dot-start').setAttribute('fill', config.colour);
+function updatePreviewMode() {
+  const isTier1 = config.tier === 'print';
+  document.getElementById('preview-tier1').style.display = (config.gpx && isTier1)  ? 'flex' : 'none';
+  document.getElementById('preview-tier2').style.display = (config.gpx && !isTier1) ? 'flex' : 'none';
+  if (!config.gpx) {
+    document.getElementById('preview-placeholder').style.display = 'flex';
+  }
 }
 
 // ── SUMMARY ──────────────────────────────────────────
 function updateSummary() {
-  document.getElementById('summary-tier').textContent   = tierNames[config.tier];
-  document.getElementById('summary-colour').textContent = config.colourName;
-  document.getElementById('summary-gpx').textContent    = config.gpx ? config.gpx.name : 'Not uploaded';
-  document.getElementById('summary-price').textContent  = `$${basePrices[config.tier]}`;
+  document.getElementById('summary-tier').textContent  = tierNames[config.tier];
+  document.getElementById('summary-gpx').textContent   = config.gpx ? config.gpx.name : 'Not uploaded';
+  document.getElementById('summary-price').textContent = `$${basePrices[config.tier]}`;
 
-  const routeRow = document.getElementById('summary-row-label');
-  if (config.label.route) {
+  const routeRow = document.getElementById('summary-row-route');
+  if (config.label.title) {
     routeRow.style.display = 'flex';
-    document.getElementById('summary-route-name').textContent = config.label.route;
+    document.getElementById('summary-route').textContent = config.label.title;
   } else {
     routeRow.style.display = 'none';
   }
 }
 
+// ── STRIPE ───────────────────────────────────────────
+const stripeLinks = {
+  print:  'https://buy.stripe.com/test_fZu3cw18Bb0X8SRgbe5EY01',
+  framed: 'https://buy.stripe.com/test_cNi28saJbglh9WV2ko5EY02',
+  gift:   'https://buy.stripe.com/test_bJefZi3gJ7OL4CBbUY5EY00',
+};
+
+document.querySelector('.order-cta').addEventListener('click', e => {
+  e.preventDefault();
+  const url = stripeLinks[config.tier];
+  if (url) window.location.href = url;
+});
+
 // ── INIT ─────────────────────────────────────────────
 setTier(config.tier);
 updateSummary();
+hidePreviews();
