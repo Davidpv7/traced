@@ -16,3 +16,13 @@
     }, { threshold: 0.15 });
  
     revealEls.forEach(el => observer.observe(el));
+
+    // ── FAQ ACCORDION ────────────────────────────────────
+document.querySelectorAll('.faq-question').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.parentElement;
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  });
+});

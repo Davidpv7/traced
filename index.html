@@ -9,24 +9,25 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=DM+Sans:wght@300;400&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/home.css">
 </head>
 <body>
-    <!-- Nav bar section -->
+
+  <!-- NAV -->
   <nav id="nav">
     <a href="#" class="nav-logo">
-    <img src="assests/images/traced_cropped.png" alt="Traced Logo" class="traced-logo">
+      <img src="assests/images/traced_cropped.png" alt="Traced Logo" class="traced-logo">
     </a>
     <ul class="nav-links">
-      <li><a href="index.html" src="shop.html">Home</a></li>  
-      <li><a href="shop.html" src="shop.html">Shop</a></li>
+      <li><a href="shop.html">Shop</a></li>
       <li><a href="#">Our Story</a></li>
       <li><a href="#">Contact</a></li>
     </ul>
   </nav>
- 
-  <!-- Hero Section -->
 
+  <!-- ── HERO ── -->
   <section class="hero">
+
     <div class="hero-bg" aria-hidden="true">
       <svg viewBox="0 0 900 600" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path class="route-path"
@@ -37,13 +38,9 @@
              C 730 400 695 405 660 395 C 625 385 600 360 580 330
              C 560 300 555 265 565 235 C 575 205 600 185 630 178"
           stroke="#ff6a00" stroke-width="1.5" stroke-linecap="round" fill="none"/>
- 
-        <!-- Route dots -->
         <circle cx="80"  cy="500" r="4" fill="#ff6a00" opacity="0.6"/>
         <circle cx="450" cy="170" r="4" fill="#ff6a00" opacity="0.6"/>
         <circle cx="630" cy="178" r="6" fill="#ff6a00" opacity="0.9"/>
- 
-        <!-- Grid lines -->
         <line x1="0" y1="150" x2="900" y2="150" stroke="#c8b89a" stroke-width="0.3" opacity="0.15"/>
         <line x1="0" y1="300" x2="900" y2="300" stroke="#c8b89a" stroke-width="0.3" opacity="0.15"/>
         <line x1="0" y1="450" x2="900" y2="450" stroke="#c8b89a" stroke-width="0.3" opacity="0.15"/>
@@ -52,21 +49,32 @@
         <line x1="675" y1="0" x2="675" y2="600" stroke="#c8b89a" stroke-width="0.3" opacity="0.15"/>
       </svg>
     </div>
- 
+
     <div class="hero-content">
       <p class="hero-eyebrow">3D Printed Cycling Art</p>
       <h1 class="hero-title">Your effort.<br /><em>Preserved.</em></h1>
       <p class="hero-sub">Turn the routes you've pedalled into permanent, handcrafted objects. Every curve. Every climb.</p>
+
+      <!-- ── FLOATING 3D MODEL ── -->
+      <div class="hero-model-wrap">
+        <img
+          src="assests/images/model.PNG"
+          alt="Traced 3D terrain model"
+          class="hero-model"
+        />
+      </div>
+
       <a href="configurator.html" class="hero-cta">Configure Your Piece</a>
     </div>
- 
+
     <div class="hero-scroll" aria-hidden="true">
       <span>Scroll</span>
       <div class="scroll-line"></div>
     </div>
+
   </section>
- 
-  <!-- WHAT WE DO -->
+
+  <!-- ── WHAT WE DO ── -->
   <section style="background: var(--bg-mid);">
     <div class="what reveal">
       <div class="what-text">
@@ -88,8 +96,8 @@
       </div>
     </div>
   </section>
- 
-  <!-- HOW IT WORKS -->
+
+  <!-- ── HOW IT WORKS ── -->
   <section>
     <div class="how">
       <p class="section-label reveal">The Process</p>
@@ -116,8 +124,8 @@
       </div>
     </div>
   </section>
- 
-  <!-- MATERIAL -->
+
+  <!-- ── MATERIAL ── -->
   <section class="material">
     <div class="material-inner">
       <div>
@@ -145,19 +153,249 @@
       </div>
     </div>
   </section>
- 
-  <!-- QUOTE -->
+
+  <!-- ── QUOTE ── -->
   <section class="quote-section">
     <blockquote class="reveal">
       Every ride is a line drawn across the world. We make that line permanent.
     </blockquote>
     <p class="quote-attr reveal reveal-delay-1">Traced — Sydney, Australia</p>
   </section>
- 
-  <!-- FOOTER -->
+
+  <!-- ── PRODUCT SHOWCASE ── -->
+  <section style="background: var(--bg-dark); padding: 0;">
+    <div class="showcase">
+      <div class="showcase-photo reveal">
+        <img src="assests/images/photo-showcase-2.jpg" alt="Traced framed piece leaning on shelf">
+      </div>
+      <div class="showcase-text">
+        <p class="section-label reveal">The Object</p>
+        <h2 class="reveal reveal-delay-1">Not a poster.<br /><em>An object.</em></h2>
+        <p class="reveal reveal-delay-2">3D printed from your GPX file in matte PLA+. The exact shape of your ride, made physical. Every curve, every climb — preserved in form you can hold.</p>
+        <div class="showcase-stat-row reveal reveal-delay-2">
+          <div class="showcase-stat">
+            <span class="showcase-stat-val">PLA+</span>
+            <span class="showcase-stat-lbl">Material</span>
+          </div>
+          <div class="showcase-stat">
+            <span class="showcase-stat-val">Matte</span>
+            <span class="showcase-stat-lbl">Finish</span>
+          </div>
+          <div class="showcase-stat">
+            <span class="showcase-stat-val">5–7d</span>
+            <span class="showcase-stat-lbl">Lead Time</span>
+          </div>
+        </div>
+        <a href="shop.html" class="hero-cta reveal reveal-delay-3" style="align-self: flex-start;">See the Collection</a>
+      </div>
+      <div class="showcase-photo reveal" style="order: 3;">
+        <img src="assests/images/photo-showcase-1.jpg" alt="Traced 3D print close up detail">
+      </div>
+      <div class="showcase-text" style="background: var(--bg-mid); order: 4;">
+        <p class="section-label reveal">The Detail</p>
+        <h2 class="reveal reveal-delay-1">Built to last.<br /><em>Built to display.</em></h2>
+        <p class="reveal reveal-delay-2">Each piece is printed to order. No two are alike. The texture, the form, the weight — it feels like something worth keeping on your wall for years.</p>
+        <a href="configurator.html" class="hero-cta reveal reveal-delay-3" style="align-self: flex-start;">Configure Yours</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── EXAMPLE ROUTES ── -->
+  <section class="routes-section">
+    <div class="routes-inner">
+      <p class="section-label reveal">Made from real rides</p>
+      <h2 class="reveal reveal-delay-1">Every route tells<br /><em>a story.</em></h2>
+      <div class="routes-grid">
+
+        <div class="route-card reveal">
+          <div class="route-card-svg">
+            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M 12 82 C 28 65 42 50 55 38 C 68 26 80 18 90 15"
+                stroke="#c8b89a" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+              <circle cx="12" cy="82" r="3" fill="#c8b89a" opacity="0.5"/>
+              <circle cx="90" cy="15" r="4" fill="#ff6a00"/>
+            </svg>
+          </div>
+          <span class="route-card-name">Sydney to Wollongong</span>
+          <span class="route-card-meta">142 km · 2,400 m gain</span>
+        </div>
+
+        <div class="route-card reveal reveal-delay-1">
+          <div class="route-card-svg">
+            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M 18 65 C 24 50 35 38 50 32 C 64 26 72 34 76 48 C 80 60 74 74 62 78 C 48 82 28 76 18 65Z"
+                stroke="#c8b89a" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+              <circle cx="18" cy="65" r="4" fill="#ff6a00"/>
+            </svg>
+          </div>
+          <span class="route-card-name">Blue Mountains Loop</span>
+          <span class="route-card-meta">89 km · 1,800 m gain</span>
+        </div>
+
+        <div class="route-card reveal reveal-delay-2">
+          <div class="route-card-svg">
+            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M 10 78 C 22 62 30 46 42 34 C 54 22 66 18 78 24 C 86 30 88 44 82 56 C 76 68 62 75 50 78"
+                stroke="#c8b89a" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+              <circle cx="10"  cy="78" r="3" fill="#c8b89a" opacity="0.5"/>
+              <circle cx="50" cy="78" r="4" fill="#ff6a00"/>
+            </svg>
+          </div>
+          <span class="route-card-name">Around the Bay</span>
+          <span class="route-card-meta">210 km · 980 m gain</span>
+        </div>
+
+      </div>
+      <p style="text-align: center; margin-top: 2rem; font-size: 0.78rem; color: var(--text-muted); font-style: italic;">Your route could be next.</p>
+    </div>
+  </section>
+
+  <!-- ── TIERS ── -->
+  <section class="tiers-section">
+    <div class="tiers-inner">
+      <p class="section-label reveal">The Collection</p>
+      <h2 class="reveal reveal-delay-1">Three ways to<br /><em>own it.</em></h2>
+      <div class="tiers-grid">
+
+        <div class="tier-card reveal">
+          <div class="tier-num">01</div>
+          <div class="tier-name">The Print</div>
+          <div class="tier-price">From $89</div>
+          <div class="tier-divider"></div>
+          <ul class="tier-includes">
+            <li>3D printed route</li>
+            <li>Choice of colour</li>
+            <li>Ships in 5–7 days</li>
+          </ul>
+          <a href="configurator.html?tier=print" class="tier-cta">Configure</a>
+        </div>
+
+        <div class="tier-card featured reveal reveal-delay-1">
+          <div class="tier-num">02</div>
+          <div class="tier-name">Print + Frame</div>
+          <div class="tier-price">From $109 · Most Popular</div>
+          <div class="tier-divider"></div>
+          <ul class="tier-includes">
+            <li>3D printed route</li>
+            <li>Shadow box frame</li>
+            <li>Stats card (distance, elevation, date)</li>
+            <li>Custom label engraved</li>
+          </ul>
+          <a href="configurator.html?tier=framed" class="tier-cta">Configure</a>
+        </div>
+
+        <div class="tier-card reveal reveal-delay-2">
+          <div class="tier-num">03</div>
+          <div class="tier-name">Gift Edition</div>
+          <div class="tier-price">From $129</div>
+          <div class="tier-divider"></div>
+          <ul class="tier-includes">
+            <li>Everything in Print + Frame</li>
+            <li>Branded gift box &amp; tissue</li>
+            <li>Wax-sealed envelope</li>
+            <li>Personal message card</li>
+          </ul>
+          <a href="configurator.html?tier=gift" class="tier-cta">Configure</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SOCIAL PROOF ── -->
+  <section style="padding: 0;">
+    <div class="social-section">
+      <div class="social-photo reveal">
+        <img src="assests/images/photo-social.jpg" alt="Fernando Celis — Pedal or Die New Zealand, framed Traced piece">
+      </div>
+      <div class="social-text">
+        <p class="section-label reveal">From the community</p>
+        <p class="social-quote reveal reveal-delay-1">So in love with these. Hung mine up the day it arrived — every time I look at it I'm back on that ride.</p>
+        <p class="social-attr reveal reveal-delay-2"><strong>Fernando Celis</strong> · Sydney, Australia</p>
+        <div class="social-ride reveal reveal-delay-3">
+          <div class="social-ride-stat">
+            <span class="social-ride-val">123 km</span>
+            <span class="social-ride-lbl">Distance</span>
+          </div>
+          <div class="social-ride-stat">
+            <span class="social-ride-val">3,070 m</span>
+            <span class="social-ride-lbl">Elevation</span>
+          </div>
+          <div class="social-ride-stat">
+            <span class="social-ride-val">Queenstown</span>
+            <span class="social-ride-lbl">Location</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FAQ ── -->
+  <section class="faq-section">
+    <div class="faq-inner">
+      <p class="section-label reveal">FAQ</p>
+      <h2 class="reveal reveal-delay-1">Common<br /><em>questions.</em></h2>
+      <div class="faq-list reveal reveal-delay-2">
+
+        <div class="faq-item">
+          <button class="faq-question">
+            What file do I need to upload?
+            <span class="faq-icon">+</span>
+          </button>
+          <p class="faq-answer">A GPX file exported from Strava, Garmin, Komoot, or any GPS device. Most apps let you export this in one tap from your activity page.</p>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            Does it have to be a cycling route?
+            <span class="faq-icon">+</span>
+          </button>
+          <p class="faq-answer">Not at all. Any GPX route works — running, hiking, swimming, or even a road trip. If it has a route, we can make it.</p>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            How long does shipping take?
+            <span class="faq-icon">+</span>
+          </button>
+          <p class="faq-answer">5–7 days from order to your door. Every piece is printed to order in Sydney, Australia.</p>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            Is my GPX data stored or shared?
+            <span class="faq-icon">+</span>
+          </button>
+          <p class="faq-answer">Never. Your file is used only to render your piece and is never stored, shared, or sold. Your data is yours.</p>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            Can I give this as a gift?
+            <span class="faq-icon">+</span>
+          </button>
+          <p class="faq-answer">Absolutely — our Gift Edition comes fully packaged with a branded gift box, tissue, and a wax-sealed envelope. Ready to give, no wrapping needed.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SPECIAL REQUESTS CTA ── -->
+  <section class="special-section">
+    <div class="special-inner">
+      <p class="section-label reveal">Special Requests</p>
+      <h2 class="reveal reveal-delay-1">Something bigger<br /><em>in mind?</em></h2>
+      <p class="reveal reveal-delay-2">Bulk orders, corporate gifts, club commemoratives, or something our configurator doesn't cover yet — let's talk. We'll plan it together and make it happen.</p>
+      <a href="#" class="special-cta reveal reveal-delay-3">Get in Touch</a>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ── -->
   <footer>
     <span class="footer-logo">Traced</span>
     <span class="footer-copy">© 2026 Traced. All rights reserved.</span>
   </footer>
+
 </body>
 </html>
